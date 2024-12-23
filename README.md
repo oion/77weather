@@ -75,3 +75,21 @@ bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+## Testing
+
+Run Unit test using Vitest:
+
+```bash
+# npm
+npm run test
+
+# pnpm
+pnpm  test
+
+# yarn
+yarn test
+
+# bun
+bun run test
+```
