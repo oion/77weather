@@ -11,7 +11,11 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ["@pinia/nuxt", "pinia-plugin-persistedstate/nuxt"],
+  modules: [
+    "@pinia/nuxt",
+    "pinia-plugin-persistedstate/nuxt",
+    "@nuxt/test-utils/module",
+  ],
 
   css: ["~/assets/css/main.css"],
 });

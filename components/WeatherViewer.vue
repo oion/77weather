@@ -39,7 +39,7 @@
 
       <!-- <pre>{{ weather }}</pre> -->
     </div>
-    <div v-else>No weather data available</div>
+    <div v-else class="no-data">No weather data available</div>
   </section>
 </template>
 
