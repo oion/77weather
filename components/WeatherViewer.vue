@@ -32,7 +32,7 @@
 
           <div class="info-box">
             <h3>Humidity</h3>
-            <p>{{ humidity }}</p>
+            <p>{{ Math.round(weather.main.humidity) }}%</p>
           </div>
         </div>
       </div>
@@ -49,10 +49,6 @@ import type { Weather } from "~/types/weather";
 const props = defineProps<{
   weather: Weather | null;
 }>();
-
-const humidity = computed<number | null>(() => {
-  return `${props.weather?.main.humidity}%`;
-});
 
 const icon = computed(() => {
   return props.weather
