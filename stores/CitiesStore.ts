@@ -1,5 +1,5 @@
 const useCitiesStore = defineStore(
-  "citiesStore",
+  'citiesStore',
   () => {
     const cities = ref<string[]>([]);
 
@@ -26,7 +26,7 @@ const useCitiesStore = defineStore(
     persist: {
       storage: piniaPluginPersistedstate.localStorage(),
     },
-  }
+  },
 );
 
 export default useCitiesStore;

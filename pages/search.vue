@@ -15,7 +15,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin-top: auto;
+  margin-top: 1rem;
   margin-bottom: auto;
 }
 </style>

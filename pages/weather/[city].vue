@@ -5,8 +5,12 @@
 
   <section>
     <ClientOnly>
-      <button v-if="weather" @click="handleSave" :disabled="citySaved">
-        {{ citySaved ? "Location Saved" : "Save Location" }}
+      <button
+        v-if="weather"
+        @click="handleSave"
+        :disabled="citySaved"
+      >
+        {{ citySaved ? 'Location Saved' : 'Save Location' }}
       </button>
     </ClientOnly>
 
@@ -15,25 +19,22 @@
 </template>
 
 <script setup lang="ts">
-import type { Weather } from "~/types/weather";
-import useCitiesStore from "~/stores/CitiesStore";
+import type { Weather } from '~/types/weather';
+import useCitiesStore from '~/stores/CitiesStore';
 
 const { city } = useRoute().params;
 
 const apiKey = useRuntimeConfig().public.openweathermapApiKey;
 
 const getWeather = async () => {
-  const { data: weather, error } = await useFetch<Weather>(
-    "https://api.openweathermap.org/data/2.5/weather",
-    {
-      key: `/Weather/${city}`,
-      query: {
-        q: city,
-        units: "metric",
-        appid: apiKey,
-      },
-    }
-  );
+  const { data: weather, error } = await useFetch<Weather>('https://api.openweathermap.org/data/2.5/weather', {
+    key: `/Weather/${city}`,
+    query: {
+      q: city,
+      units: 'metric',
+      appid: apiKey,
+    },
+  });
 
   if (weather) {
   }

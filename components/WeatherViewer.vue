@@ -7,7 +7,11 @@
 
       <div class="info">
         <div class="primary">
-          <img v-if="icon" :src="icon" :alt="weather.weather[0].description" />
+          <img
+            v-if="icon"
+            :src="icon"
+            :alt="weather.weather[0].description"
+          />
           <p>
             <span>{{ weather.main.temp }}°</span>
             <span>{{ weather.weather[0].description }}</span>
@@ -39,21 +43,24 @@
 
       <!-- <pre>{{ weather }}</pre> -->
     </div>
-    <div v-else class="no-data">No weather data available</div>
+    <div
+      v-else
+      class="no-data"
+    >
+      No weather data available
+    </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import type { Weather } from "~/types/weather";
+import type { Weather } from '~/types/weather';
 
 const props = defineProps<{
   weather: Weather | null;
 }>();
 
 const icon = computed(() => {
-  return props.weather
-    ? `http://openweathermap.org/img/wn/${props.weather.weather[0].icon}@2x.png`
-    : null;
+  return props.weather ? `http://openweathermap.org/img/wn/${props.weather.weather[0].icon}@2x.png` : null;
 });
 </script>
 

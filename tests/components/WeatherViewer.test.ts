@@ -1,14 +1,12 @@
-import { describe, test, expect } from "vitest";
-import { mount } from "@vue/test-utils";
+import { describe, test, expect } from 'vitest';
+import { mount } from '@vue/test-utils';
 
-import WeatherViewer from "~/components/WeatherViewer.vue";
+import WeatherViewer from '~/components/WeatherViewer.vue';
 
 const weatherData = {
   coord: { lon: -0.1257, lat: 51.5085 },
-  weather: [
-    { id: 803, main: "Clouds", description: "broken clouds", icon: "04n" },
-  ],
-  base: "stations",
+  weather: [{ id: 803, main: 'Clouds', description: 'broken clouds', icon: '04n' }],
+  base: 'stations',
   main: {
     temp: 6.56,
     feels_like: 4.61,
@@ -26,13 +24,13 @@ const weatherData = {
   sys: {
     type: 2,
     id: 2075535,
-    country: "GB",
+    country: 'GB',
     sunrise: 1734941093,
     sunset: 1734969269,
   },
   timezone: 0,
   id: 2643743,
-  name: "London",
+  name: 'London',
   cod: 200,
 };
 
@@ -42,48 +40,46 @@ const componentDefaults = {
   },
 };
 
-describe("Mounting", () => {
-  test("Component", async () => {
+describe('Mounting', () => {
+  test('Component', async () => {
     const component = mount(WeatherViewer, componentDefaults);
 
     expect(component.exists()).toBeTruthy();
   });
 });
 
-describe("Visibility", () => {
-  test("Title", async () => {
+describe('Visibility', () => {
+  test('Title', async () => {
     const component = mount(WeatherViewer, componentDefaults);
 
-    expect(component.find("h2")).toBeTruthy();
+    expect(component.find('h2')).toBeTruthy();
   });
 
-  test.todo("Rest of the required DOM elements");
+  test.todo('Rest of the required DOM elements');
 });
 
-describe("Props", () => {
-  test("Title", async () => {
+describe('Props', () => {
+  test('Title', async () => {
     const component = mount(WeatherViewer, componentDefaults);
 
-    expect(component.find("h2").text()).contains("London");
+    expect(component.find('h2').text()).contains('London');
 
-    expect(component.find("h2").text()).contains("GB");
+    expect(component.find('h2').text()).contains('GB');
   });
 
-  test("No weather data available", async () => {
+  test('No weather data available', async () => {
     const component = mount(WeatherViewer, {
       props: {
         weather: null,
       },
     });
 
-    expect(component.find(".no-data").text()).contains(
-      "No weather data available"
-    );
+    expect(component.find('.no-data').text()).contains('No weather data available');
   });
 
-  test.todo("Test Props for the required DOM elements");
+  test.todo('Test Props for the required DOM elements');
 });
 
-describe("Events", () => {
-  test.todo("Test Events");
+describe('Events', () => {
+  test.todo('Test Events');
 });

@@ -1,0 +1,17 @@
+# Folders
+.circleci/
+.github/
+.nuxt/
+.output/
+.vscode
+coverage/
+node_modues/
+
+
+# Files
+.dockerignore
+.gitignore
+.npmrc
+Dockerfile
+pnpm-lock.yaml
+tsconfig.json
