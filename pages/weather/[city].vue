@@ -7,7 +7,7 @@
     <ClientOnly>
       <button
         v-if="weather"
-        @click="handleSave"
+        @click="add(city)"
         :disabled="citySaved"
       >
         {{ citySaved ? 'Location Saved' : 'Save Location' }}
@@ -22,9 +22,9 @@
 import type { Weather } from '~/types/weather';
 import useCitiesStore from '~/stores/CitiesStore';
 
-const { city } = useRoute().params;
-
 const apiKey = useRuntimeConfig().public.openweathermapApiKey;
+
+const { city } = useRoute().params as { city: string };
 
 const getWeather = async () => {
   const { data: weather, error } = await useFetch<Weather>('https://api.openweathermap.org/data/2.5/weather', {
@@ -48,12 +48,7 @@ const getWeather = async () => {
 
 const weather = await getWeather();
 
-const { addCity, isSaved } = useCitiesStore();
-
-const handleSave = () => {
-  // TODO: save city in (name, country) format
-  addCity(city as string);
-};
+const { add, isSaved } = useCitiesStore();
 
 const citySaved = computed(() => isSaved(city as string));
 </script>

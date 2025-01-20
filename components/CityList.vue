@@ -53,11 +53,7 @@ import useCitiesStore from '~/stores/CitiesStore';
 
 const citiesStore = useCitiesStore();
 const { cities } = storeToRefs(citiesStore);
-const { removeCity } = citiesStore;
-
-const remove = (city: string) => {
-  removeCity(city);
-};
+const { remove } = citiesStore;
 </script>
 
 <style scoped type="scss">

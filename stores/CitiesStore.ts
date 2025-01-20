@@ -3,13 +3,14 @@ const useCitiesStore = defineStore(
   () => {
     const cities = ref<string[]>([]);
 
-    const addCity = (city: string) => {
+    const add = (city: string) => {
       if (!cities.value.includes(city)) {
         cities.value.push(city);
       }
     };
 
-    const removeCity = (city: string) => {
+    // remove City
+    const remove = (city: string) => {
       cities.value = cities.value.filter((item) => item !== city);
     };
 
@@ -18,8 +19,8 @@ const useCitiesStore = defineStore(
     return {
       cities,
       isSaved,
-      addCity,
-      removeCity,
+      add,
+      remove,
     };
   },
   {
