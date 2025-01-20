@@ -7,8 +7,8 @@
     <ClientOnly>
       <button
         v-if="weather"
-        @click="add(city)"
         :disabled="citySaved"
+        @click="add(city)"
       >
         {{ citySaved ? 'Location Saved' : 'Save Location' }}
       </button>
@@ -35,9 +35,6 @@ const getWeather = async () => {
       appid: apiKey,
     },
   });
-
-  if (weather) {
-  }
 
   if (error.value) {
     console.error(error.value);
