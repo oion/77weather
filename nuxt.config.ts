@@ -7,7 +7,8 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      openweathermapApiKey: '', // can be overridden by NUXT_PUBLIC_API_KEY environment variable
+      openweathermapApiKey: '',
+      tomorrowioApiKey: '',
     },
   },
 
