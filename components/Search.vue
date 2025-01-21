@@ -1,15 +1,16 @@
 <template>
   <fieldset>
     <input
-      type="text"
       v-model="city"
+      type="text"
       :placeholder="isGettingPosition ? 'Location is loading...' : 'Search for a city'"
+      @keyup="search"
       @keyup.enter="navigateToWeatherDetails"
     />
 
     <button
-      @click="getCurrentPosition"
       type="button"
+      @click="getCurrentPosition"
     >
       <svg
         viewBox="0 0 100 100"
@@ -28,10 +29,13 @@
       </svg>
     </button>
   </fieldset>
+  <pre>{{ weather }}</pre>
 </template>
 
 <script setup lang="ts">
 import type { Weather } from '~/types/weather';
+
+import { useDebounceFn } from '@vueuse/core';
 
 import { useRouter } from 'vue-router';
 
@@ -40,6 +44,8 @@ const apiKey = useRuntimeConfig().public.openweathermapApiKey;
 const router = useRouter();
 
 const city = ref<string>('');
+
+const weather = ref<Weather | null>(null);
 
 const currentCoords = ref<{ lat: number; long: number }>({ lat: 0, long: 0 });
 
@@ -59,18 +65,18 @@ const getCurrentPosition = async () => {
 };
 
 const getCityName = async () => {
-  const { data } = await useFetch<any>('https://api.openweathermap.org/geo/1.0/reverse', {
+  const { data } = await useFetch('https://api.openweathermap.org/geo/1.0/reverse', {
     key: `/ReverseCoords/${currentCoords.value.lat}/${currentCoords.value.long}`,
     query: {
       lat: currentCoords.value.lat,
       lon: currentCoords.value.long,
-      limit: 0,
+      limit: 1,
       appid: apiKey,
     },
     server: true,
   });
 
-  return `${data.value[0].name}, ${data.value[0].country}` || '';
+  return data.value?.[0] ? `${data.value[0].name}, ${data.value[0].country}` : '';
 };
 
 watch(currentCoords, async () => {
@@ -87,6 +93,24 @@ const navigateToWeatherDetails = () => {
     params: { city: city.value },
   });
 };
+
+const getWeather = async () => {
+  const { data: weather, error } = await useFetch<Weather>('/api/weather', {
+    query: {
+      city: city.value,
+    },
+  });
+
+  if (error.value) {
+    console.error(error.value);
+  }
+
+  return weather.value;
+};
+
+const search = useDebounceFn(async () => {
+  weather.value = await getWeather();
+}, 2000);
 </script>
 
 <style scoped>
