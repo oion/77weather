@@ -83,6 +83,10 @@ watch(currentCoords, async () => {
   city.value = await getCityName();
 });
 
+watch(city, () => {
+  search();
+});
+
 const navigateToWeatherDetails = () => {
   if (!city.value) {
     return;
