@@ -16,30 +16,7 @@
           </NuxtLink>
 
           <button @click="remove(city)">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-            >
-              <g
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke="currentColor"
-              >
-                <line
-                  x1="18"
-                  y1="6"
-                  x2="6"
-                  y2="18"
-                />
-                <line
-                  x1="6"
-                  y1="6"
-                  x2="18"
-                  y2="18"
-                />
-              </g>
-            </svg>
+            <IconClose />
           </button>
         </li>
       </ul>
@@ -48,11 +25,14 @@
 </template>
 
 <script setup lang="ts">
+import { IconClose } from './Icons';
 import { storeToRefs } from 'pinia';
 import useCitiesStore from '~/stores/CitiesStore';
 
 const citiesStore = useCitiesStore();
+
 const { cities } = storeToRefs(citiesStore);
+
 const { remove } = citiesStore;
 </script>
 

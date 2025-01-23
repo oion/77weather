@@ -1,42 +1,29 @@
 <template>
-  <fieldset>
-    <input
-      v-model="city"
-      type="text"
-      :placeholder="isGettingPosition ? 'Location is loading...' : 'Search for a city'"
-      @keyup="search"
-      @keyup.enter="navigateToWeatherDetails"
-    />
+  <div>
+    <fieldset>
+      <input
+        v-model="city"
+        type="text"
+        :placeholder="isGettingPosition ? 'Location is loading...' : 'Search for a city'"
+        @keyup="search"
+        @keyup.enter="navigateToWeatherDetails"
+      />
 
-    <button
-      type="button"
-      @click="getCurrentPosition"
-    >
-      <svg
-        viewBox="0 0 100 100"
-        :class="isGettingPosition ? 'is-searching' : ''"
+      <button
+        type="button"
+        @click="getCurrentPosition"
       >
-        <path
-          d="m45.5078 95.332v-4.6679l-1.4062-.2344c-7.3047-1.1524-13.7696-3.9453-19.5899-8.4766-1.7187-1.3281-5.039-4.6679-6.4453-6.4648-4.5703-5.8594-7.3828-12.3047-8.51562-19.5703l-.21484-1.4258h-4.66797-4.66797v-4.4922-4.4922h4.66797 4.6875l.11719-.918c.99614-7.207 3.98434-14.1992 8.51564-19.9804 1.5625-1.9922 4.7851-5.2149 6.8164-6.7969 5.4687-4.2773 12.1875-7.1484 19.2969-8.26172l1.4062-.21484v-4.66797-4.66797h4.4922 4.4922v4.66797 4.66797l1.4258.23437c13.6132 2.14849 24.8828 10.39059 30.8008 22.55859 1.8164 3.75 3.0273 7.6367 3.7109 11.9727l.2344 1.4062h4.6679 4.668v4.4922 4.4922h-4.668-4.6679l-.2149 1.4258c-1.8554 11.875-8.418 22.0312-18.4765 28.5351-4.5704 2.9492-10.3125 5.0977-16.0547 5.9961l-1.4258.2149v4.6679 4.668h-4.4922-4.4922zm9.2774-13.9062c12.5586-1.8946 22.9882-11.3867 26.0546-23.711.6446-2.6562.879-4.5703.879-7.7148 0-1.6602-.1172-3.7305-.254-4.5898-2.1875-14.043-12.832-24.6875-26.875-26.875-2.0117-.3125-7.1679-.3125-9.1796 0-9.0821 1.4257-16.8555 6.3671-21.8555 13.8867-3.6133 5.4297-5.2735 10.957-5.2735 17.5781 0 3.1445.2344 5.0586.879 7.7148 1.875 7.5782 6.6796 14.3555 13.2421 18.7305 4.6875 3.1055 9.1797 4.6485 15.3516 5.2735 1.1719.1171 5.4883-.0586 7.0313-.293z"
-          fill="#000"
-        />
-        <circle
-          cx="50"
-          cy="50"
-          fill="#010101"
-          r="18"
-        />
-      </svg>
-    </button>
-  </fieldset>
-  <pre>{{ weather }}</pre>
+        <IconSearch :class="isGettingPosition ? 'is-searching' : ''" />
+      </button>
+    </fieldset>
+    <pre>{{ weather }}</pre>
+  </div>
 </template>
 
 <script setup lang="ts">
+import { IconSearch } from './Icons';
 import type { Weather } from '~/types/weather';
-
 import { useDebounceFn } from '@vueuse/core';
-
 import { useRouter } from 'vue-router';
 
 const apiKey = useRuntimeConfig().public.openweathermapApiKey;
